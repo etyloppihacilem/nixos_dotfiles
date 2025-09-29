@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   inputs,
   ...
@@ -18,11 +19,6 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  programs.zsh = {
-    enable = true;
-  };
   home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -40,7 +36,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    zoxide
     kitty
     tree
     nerd-fonts.symbols-only
@@ -55,10 +50,13 @@
     julia
   ];
 
+  programs.zoxide.enable = true;
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
     ".config/kitty/kitty.conf".source = ./dotfiles/kitty.conf;
+    # ".zshrc".source = ./dotfiles/zshrc;
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -90,6 +88,34 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     TERMINAL = "kitty";
+  };
+
+  # Install zsh
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      ll = "ls -l";
+      la = "ls -lA";
+      rm = "rm -v";
+      cp = "cp -v";
+      cd = "z";
+      open = "xdg-open";
+      lg = "lazygit";
+    };
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" ];
+      custom = "$HOME/.oh-my-zsh/";
+      theme = "af-magic";
+    };
+    initContent = ''
+        clear
+        fastfetch
+    '';
   };
 
   programs.git = {

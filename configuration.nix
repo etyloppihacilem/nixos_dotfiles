@@ -91,6 +91,13 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  # The home.packages option allows you to install Nix packages into your
+  # environment.
+  # Install zsh
+  environment.shells = with pkgs; [zsh];
+  programs.zsh = {
+    enable = true;
+  };
   users.users.sherlock = {
     isNormalUser = true;
     description = "Sherlock";
@@ -99,6 +106,7 @@
       kdePackages.kate
     #  thunderbird
     ];
+    shell = pkgs.zsh;
   };
 
   # Enable automatic login for the user.
@@ -113,10 +121,6 @@
 
   # Install git
   programs.git.enable = true;
-
-  # Install zsh
-  environment.shells = with pkgs; [zsh];
-  programs.zsh.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
