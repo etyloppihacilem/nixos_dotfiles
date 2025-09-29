@@ -130,10 +130,13 @@
     gcc
     gnumake
     zip
+    unzip
     go
     php
     zulu24
     cargo
+    pkg-config
+    openssl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
