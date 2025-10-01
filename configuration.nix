@@ -58,6 +58,7 @@
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+  programs.hyprland.enable = true; # enable Hyprland
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -102,16 +103,16 @@
     isNormalUser = true;
     description = "Sherlock";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
+    # packages = with pkgs; [
+    #   kdePackages.kate
+    # #  thunderbird
+    # ];
     shell = pkgs.zsh;
   };
 
   # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "sherlock";
+  # services.displayManager.autoLogin.enable = true;
+  # services.displayManager.autoLogin.user = "sherlock";
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -137,6 +138,7 @@
     cargo
     pkg-config
     openssl
+    kitty
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

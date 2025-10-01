@@ -36,7 +36,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    kitty
     tree
     nerd-fonts.symbols-only
     jetbrains-mono
